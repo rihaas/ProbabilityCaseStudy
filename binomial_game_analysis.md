@@ -96,12 +96,12 @@ These functions (probability mass function, probability density function, cumula
 
 ## Case Study in Empirical vs. Theoretical Probability (From the Notebook)
 
-[Include the content of the "Case study in Empirical vs. Theoretical Probability" section here, explaining the difference between the two with the example provided.]
+
 
 ## Conclusion of the Case Study (From the Notebook)
 
-[Include the "Conclusion of the case study" section from the notebook.]
+
 
 ## Conditions of Binomial Experiment (From the Notebook)
 
-[Include the "Conditions of Binomial Experiment" section from the notebook.]
+
