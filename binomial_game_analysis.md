@@ -1,107 +1,142 @@
-# Case Study: Analyzing a Probability Game
+# Case Study: Probability Game Analysis
 
 ## Introduction
 
-This case study examines a probability game involving drawing balls from a bag with replacement. We will analyze the likelihood of different outcomes and determine if participating in the game would be profitable or result in a loss.
+This case study analyzes a probability game involving drawing balls from a bag with replacement. We will examine the likelihood of different outcomes and determine the expected profitability of the game.
 
 ## Game Description
 
-A bag contains [mention the number] red balls and [mention the number] blue balls.
+A bag contains 3 Red balls and 2 Blue balls. [cite: 1, 2, 3]
 
 The rules of the game are as follows:
 
-* You pick a ball, note its color, and **put it back** in the bag. This is done a total of 4 times.
-* If all 4 times the ball drawn was red, you win ₹ 10.
-* Otherwise, you lose ₹ 1.
+* You pick a ball, write down its color, and put it back in the bag. This is done 4 times in total. [cite: 2, 3]
+* If all 4 times the Red balls are drawn, you win Rs 150. [cite: 3]
+* Otherwise, you lose Rs 10. [cite: 3]
 
 ## Question
 
-Would engaging in this game result in a profit or loss for you?
+Would engaging in this game result in a profit or a loss for you? [cite: 3]
 
 ## Problem Breakdown
 
-* **Problem mentions that once you've noted the color, you put it back in the bag:** This indicates that the trials are independent, and the probability of drawing a red or blue ball remains constant for each draw.
-* **What does this mean in the probability language?:** This implies we can use the binomial distribution to model the number of red balls drawn.
-* **It means that the trials are independent with replacement.**
-* **The step of taking out the ball is repeated 4 times:** This means the number of trials ($n$) is 4.
+* The problem states that once you've noted the color, you put the ball back in the bag. [cite: 4]
+    * What does this mean in probability terms? [cite: 4]
+    * It means that the balls are drawn with replacement. [cite: 5]
+* The step of taking out the ball is repeated 4 times. [cite: 5]
 
 ## Defining the Random Variable
 
-Whether you end up gaining or losing will depend on how many red balls are drawn.
+Whether you end up gaining or losing will depend on how many red balls are drawn. [cite: 5, 6]
 
-Therefore, let's define a random variable $X$ to denote the number of red balls drawn in 4 trials.
+Therefore, let's define a random variable X to denote the number of red balls drawn in 4 trials. [cite: 6]
 
-* $X$ is a discrete random variable.
-* Possible outcomes for $X$ are 0, 1, 2, 3, or 4.
+* X is a discrete random variable. [cite: 7]
+* Possible outcomes for X: 0, 1, 2, 3, or 4 [cite: 7]
 
-## Probability of Success (Drawing a Red Ball)
+## Theoretical Approach: Compute Probability Using Rules
 
-Let $p$ be the probability of drawing a red ball on a single trial. Based on the information provided (assuming equal likelihood of picking any ball initially):
+* What is the probability of 1 red ball in 1 pick? [cite: 39, 40]
+    * P(Red) = 3/5 [cite: 40]
+* What is the probability of 1 blue ball in 1 pick? [cite: 40, 41]
+    * P(Blue) = 2/5 [cite: 41]
+* What is the probability of 2 red balls in 2 picks? [cite: 41, 42]
+    * P(Red, Red) = (3/5) \* (3/5) [cite: 42]
+* What is the probability of 1 red ball in the first pick and 1 blue ball in the second? [cite: 42, 43]
+    * P(Red, Blue) = (3/5) \* (2/5) [cite: 43]
+* What is the probability of 1 blue ball in the first pick and 1 red ball in the second? [cite: 43]
+    * P(Blue, Red) = (2/5) \* (3/5)  
+* Probability of other combinations (from notebook):
+    * P(Red, Red, Red, Blue) = (3/5)(3/5)(3/5)(2/5)
+    * P(Blue, Blue, Blue, Blue) = (2/5)(2/5)(2/5)(2/5)
 
-$p = \frac{\text{Number of red balls}}{\text{Total number of balls}} = \frac{[mention the number]}{[mention the total number]}$
+## Probability of Obtaining 1 Red Ball (X=1) [cite: 45, 46, 47]
 
-Let $q$ be the probability of failure (drawing a blue ball):
+For X = 1, we have 4 possible cases:
 
-$q = 1 - p = \frac{\text{Number of blue balls}}{\text{Total number of balls}} = \frac{[mention the number]}{[mention the total number]}$
+* BBBR
+* BBRB
+* BRBB
+* RBBB
 
-## Binomial Distribution
+The probability of each case is (2/5)³ \* (3/5)¹.
 
-The number of red balls drawn in 4 trials follows a binomial distribution with parameters $n=4$ and probability of success $p$. The probability of getting exactly $k$ successes (red balls) in $n$ trials is given by the probability mass function (PMF):
+Therefore, P(X=1) = 4 \* (2/5)³ \* (3/5)¹
 
-$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+## Probability of Getting 2 Red Balls (X=2) [cite: 47, 48]
 
-Where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient.
+There are 6 possible orientations for X=2. [cite: 48, 49]
 
-## Calculating Probabilities for Each Outcome
+The probability of each orientation is (2/5)² \* (3/5)². [cite: 50]
 
-We need to calculate the probability of getting 0, 1, 2, 3, and 4 red balls.
+Therefore, P(X=2) = 6 \* (2/5)² \* (3/5)²
 
-* $P(X=0) = \binom{4}{0} p^0 q^4 = 1 \times 1 \times q^4 = q^4$
-* $P(X=1) = \binom{4}{1} p^1 q^3 = 4 \times p \times q^3 = 4pq^3$
-* $P(X=2) = \binom{4}{2} p^2 q^2 = 6 \times p^2 \times q^2 = 6p^2q^2$
-* $P(X=3) = \binom{4}{3} p^3 q^1 = 4 \times p^3 \times q = 4p^3q$
-* $P(X=4) = \binom{4}{4} p^4 q^0 = 1 \times p^4 \times 1 = p^4$
+## General Expression (Binomial Distribution) [cite: 51, 52, 53]
 
-## Expected Value (Profit/Loss)
+We can generalize this as:
 
-To determine if the game is profitable, we need to calculate the expected value. The expected value $E[X]$ is the sum of each possible outcome multiplied by its probability. In this case, the "outcome" is the monetary gain or loss.
+P(X=k) = ⁴Cₖ \* (3/5)ᵏ \* (2/5)⁴⁻ᵏ
 
-* **Winning Scenario (4 red balls):** Probability = $P(X=4) = p^4$, Profit = ₹ 10
-* **Losing Scenario (0, 1, 2, or 3 red balls):** Probability = $P(X<4) = 1 - P(X=4) = 1 - p^4$, Loss = -₹ 1
+Where ⁴Cₖ is the binomial coefficient (math.comb(4, k) in Python). [cite: 53, 54]
 
-The expected value $E[\text{Profit}]$ is:
+Using this, we can calculate probabilities for all X values:
 
-$$E[\text{Profit}] = (₹ 10 \times P(X=4)) + (-₹ 1 \times P(X<4))$$
-$$E[\text{Profit}] = (10 \times p^4) - (1 \times (1 - p^4))$$
-$$E[\text{Profit}] = 10p^4 - 1 + p^4$$
-$$E[\text{Profit}] = 11p^4 - 1$$
+* P(X=0) = ⁴C₀ \* (3/5)⁰ \* (2/5)⁴
+* P(X=1) = ⁴C₁ \* (3/5)¹ \* (2/5)³
+* P(X=2) = ⁴C₂ \* (3/5)² \* (2/5)²
+* P(X=3) = ⁴C₃ \* (3/5)³ \* (2/5)¹
+* P(X=4) = ⁴C₄ \* (3/5)⁴ \* (2/5)⁰
 
-## Conclusion (Based on the Expected Value)
+## Verification with Code (Theoretical Probabilities) [cite: 54, 55, 56, 57]
 
-To make a decision, you need to calculate the value of $p$ based on the number of red and blue balls in the bag. Once you have $p$, you can calculate the expected profit using the formula $E[\text{Profit}] = 11p^4 - 1$.
+The notebook uses `math.comb()` to calculate the binomial coefficients. The calculated probabilities are:
 
-* If $E[\text{Profit}] > 0$, then playing the game is expected to be profitable in the long run.
-* If $E[\text{Profit}] < 0$, then playing the game is expected to result in a loss in the long run.
-* If $E[\text{Profit}] = 0$, then the game is fair.
+* P(X=0) ≈ 0.0256
+* P(X=1) ≈ 0.1536
+* P(X=2) ≈ 0.3456
+* P(X=3) ≈ 0.3456
+* P(X=4) ≈ 0.1296
 
-**[You can add further analysis here, such as calculating the specific probabilities and expected value once you know the number of red and blue balls.]**
+These values are very close to the empirical probabilities obtained through simulations. [cite: 57, 58]
 
-## Summary of Relationships (From the Notebook)
+## Expected Value Calculation (Theoretical)
 
-* The [mention the first relationship from the notebook].
-* The [mention the second relationship from the notebook].
-* The [mention the third relationship from the notebook].
+To determine if the game is profitable, we calculate the expected value:
 
-These functions (probability mass function, probability density function, cumulative distribution function) are essential tools in probability and statistics for understanding the behavior of different probability distributions.
+E(Profit) = (Profit for 4 Reds \* P(X=4)) + (Loss for other outcomes \* P(X<4))
 
-## Case Study in Empirical vs. Theoretical Probability (From the Notebook)
+E(Profit) = (150 \* 0.1296) + (-10 \* (1 - 0.1296))
 
+E(Profit) = 19.44 - 8.704
 
+E(Profit) ≈ 10.74
 
-## Conclusion of the Case Study (From the Notebook)
+## Conclusion (Theoretical)
 
+The expected profit is approximately Rs 10.74. Therefore, based on the theoretical analysis, playing this game is expected to be profitable in the long run.
 
+## Empirical Approach (From Notebook)
 
-## Conditions of Binomial Experiment (From the Notebook)
+The notebook also demonstrates an empirical approach using Python simulations with `numpy.random.choice()` to estimate the probabilities. It simulates the ball draws 10,000 times and calculates the average number of red balls drawn.
 
+* This approach calculates the empirical probability by simulating the experiment many times. [cite: 13]
+* The empirical expected value is calculated as the weighted average of the number of red balls drawn in each simulation. [cite: 25, 26, 27, 28, 29, 30]
 
+## Comparison of Empirical and Theoretical Results [cite: 57, 58, 59]
+
+The empirical probabilities obtained from the simulations are close to the theoretical probabilities, especially with a large number of simulations (10,000). [cite: 57, 58] This validates the theoretical calculations.
+
+## Key Takeaways
+
+* **Theoretical Probability:** Calculated using mathematical rules and formulas.
+* **Empirical Probability:** Estimated from observations and experiments.
+* The binomial distribution is a useful tool for analyzing events with a fixed number of independent trials and two possible outcomes. [cite: 61, 62, 63, 64]
+
+## Conditions of Binomial Experiment
+
+The notebook outlines the conditions for a binomial experiment:
+
+* Fixed number of trials (n)
+* Each trial is independent.
+* Each trial has two outcomes: Success or Failure.
+* The probability of success (p) is the same for each trial.
