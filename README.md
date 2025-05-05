@@ -4,7 +4,7 @@ This repository contains a case study analyzing a probability game using the bin
 
 ## Contents
 
-* `case_study.md`:  Detailed analysis of the probability game, including problem description, theoretical calculations, empirical simulations, and conclusions.
+* `casestudy.md`:  Detailed analysis of the probability game, including problem description, theoretical calculations, empirical simulations, and conclusions.
 
 ## Overview
 
